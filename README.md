@@ -4,7 +4,7 @@ Sistema de Machine Learning para predecir la probabilidad de que un paciente no 
 
 ## Dataset
 
-- **Registros: 110,527 citas médicas
+- Registros: 110,527 citas médicas
 - Variables: 14 características del paciente y cita
 - Objetivo: Predecir No-Show (Sí/No)
 
@@ -17,7 +17,7 @@ Ayudar a clínicas y hospitales a:
 
 ## Equipo
 
-- Persona 1:
-- Persona 2:
-- Persona 3:
-- Persona 4:
+- Diego Fernando Nuñez Dia
+- Diego Fernando Castaneda Loaiza
+- Paula Carolina Barrera Camargo
+- Mateo Atehortua Arango
