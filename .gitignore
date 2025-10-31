@@ -169,8 +169,5 @@ notebooks/exploratory/
 *.jpeg
 *.pdf
 
-# Datos folder (legacy)
-datos/
-
 # Claude Code
 .claude/
