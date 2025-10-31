@@ -57,19 +57,16 @@ def convert_dtypes(df: pd.DataFrame) -> pd.DataFrame:
     """
     df_converted = df.copy()
 
-    # Convertir variables categóricas
-    categorical_cols = [
-        'Gender', 'Neighbourhood', 'Scholarship', 'Hipertension',
-        'Diabetes', 'Alcoholism', 'Handcap', 'SMS_received'
-    ]
-    df_converted[categorical_cols] = df_converted[categorical_cols].astype('category')
-
-    # Convertir fechas
+    # Convertir fechas primero
     df_converted['AppointmentDay'] = pd.to_datetime(df_converted['AppointmentDay'])
     df_converted['ScheduledDay'] = pd.to_datetime(df_converted['ScheduledDay'])
 
     # Convertir variable objetivo a binaria
     df_converted['No-show'] = df_converted['No-show'].map({'No': 0, 'Yes': 1})
+
+    # Convertir Gender y Neighbourhood a categorias
+    df_converted['Gender'] = df_converted['Gender'].astype('category')
+    df_converted['Neighbourhood'] = df_converted['Neighbourhood'].astype('category')
 
     return df_converted
 
