@@ -75,27 +75,13 @@ git clone https://github.com/tu-usuario/medical-noshow-prediction.git
 cd medical-noshow-prediction
 ```
 
-### Paso 2: Instalar Dependencias con uv
+### Paso 2: Instalar Dependencias
 
 ```bash
 uv sync
 ```
 
-Este comando crea automaticamente el entorno virtual e instala todas las dependencias.
-
-### Alternativa: Instalacion Manual
-
-Si prefieres usar pip tradicional:
-
-```bash
-python -m venv .venv
-# En Windows:
-.venv\Scripts\activate
-# En Linux/Mac:
-source .venv/bin/activate
-
-pip install -r requirements.txt
-```
+Este comando crea automaticamente el entorno virtual e instala todas las dependencias definidas en `pyproject.toml`.
 
 ---
 
