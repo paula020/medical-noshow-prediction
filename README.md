@@ -66,7 +66,7 @@ medical-noshow-prediction/
 
 ### Requisitos Previos
 - Python 3.11 o superior
-- pip o conda instalado
+- uv instalado (https://docs.astral.sh/uv/)
 
 ### Paso 1: Clonar el Repositorio
 
@@ -75,26 +75,25 @@ git clone https://github.com/tu-usuario/medical-noshow-prediction.git
 cd medical-noshow-prediction
 ```
 
-### Paso 2: Crear Entorno Virtual
+### Paso 2: Instalar Dependencias con uv
 
-**Opción A: Con conda (recomendado)**
 ```bash
-conda create -n medicalPrediction python=3.11
-conda activate medicalPrediction
+uv sync
 ```
 
-**Opción B: Con venv**
+Este comando crea automaticamente el entorno virtual e instala todas las dependencias.
+
+### Alternativa: Instalacion Manual
+
+Si prefieres usar pip tradicional:
+
 ```bash
 python -m venv .venv
 # En Windows:
 .venv\Scripts\activate
 # En Linux/Mac:
 source .venv/bin/activate
-```
 
-### Paso 3: Instalar Dependencias
-
-```bash
 pip install -r requirements.txt
 ```
 
@@ -107,7 +106,7 @@ pip install -r requirements.txt
 Abrir y ejecutar el notebook principal:
 
 ```bash
-jupyter notebook notebooks/01_analisis_completo.ipynb
+uv run jupyter notebook notebooks/01_analisis_completo.ipynb
 ```
 
 Este notebook incluye:
@@ -125,7 +124,7 @@ Este notebook incluye:
 Una vez entrenados los modelos, ejecutar la interfaz web:
 
 ```bash
-streamlit run app/streamlit_app.py
+uv run streamlit run app/streamlit_app.py
 ```
 
 La aplicación se abrirá en `http://localhost:8501` y permite:
