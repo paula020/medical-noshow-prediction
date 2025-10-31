@@ -36,7 +36,8 @@ medical-noshow-prediction/
 │   └── synthetic/                 # Datos sintéticos generados
 │
 ├── notebooks/                     # Jupyter notebooks
-│   └── 01_analisis_completo.ipynb # Análisis EDA y modelamiento
+│   ├── 01_analisis_completo.ipynb # Análisis principal para entrega
+│   └── exploratory/               # Notebooks de exploracion inicial
 │
 ├── src/                           # Código fuente modular
 │   ├── __init__.py
