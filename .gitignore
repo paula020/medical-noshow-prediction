@@ -149,3 +149,28 @@ Desktop.ini
 *.temp
 *.bak
 *.swp
+
+# Project-specific
+# Models (too large for git - regenerate locally)
+models/*.pkl
+
+# Data files (large datasets)
+data/*.csv
+data/processed/
+data/synthetic/
+
+# Old notebooks (keep only main analysis)
+02exploracion_datos.ipynb
+notebooks/exploratory/
+
+# Visualization outputs (can be regenerated)
+*.png
+*.jpg
+*.jpeg
+*.pdf
+
+# Datos folder (legacy)
+datos/
+
+# Claude Code
+.claude/
