@@ -71,7 +71,7 @@ medical-noshow-prediction/
 ### Paso 1: Clonar el Repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/medical-noshow-prediction.git
+git clone https://github.com/paula020/medical-noshow-prediction.git
 cd medical-noshow-prediction
 ```
 
