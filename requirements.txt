@@ -1,5 +1,5 @@
 # Core Data Science Libraries
-pandas==2.1.4
+pandas>=2.3,<3.0
 numpy==1.26.2
 
 # Visualization
