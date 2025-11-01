@@ -101,6 +101,10 @@ Este comando automaticamente:
 - Instala Python 3.11 si no está disponible
 - Instala todas las dependencias del `pyproject.toml`
 - Configura el proyecto listo para usar
+-durante el proceso de instalacion debe verse una imagen similar a siguiente:
+
+![Install dependencias](img/installpkg.png)
+
 
 ### Verificar Instalación
 
@@ -124,6 +128,7 @@ Debería mostrar Python 3.11 o superior.
    ```bash
    uv run jupyter notebook notebooks/01_analisis_completo.ipynb
    ```
+![Ejecucion del notebook](img/Jupyter.png)
 
 3. Se abrirá una pestaña en tu navegador con Jupyter
 
@@ -164,6 +169,9 @@ Debería mostrar Python 3.11 o superior.
 3. Se abrirá automáticamente en tu navegador en `http://localhost:8501`
 
 4. Si no se abre automáticamente, copia y pega esa URL en tu navegador
+   se visualizara una imagen similar a la siguiente:
+   ![Install dependencias](img/streamlit.png)
+
 
 5. En la aplicación verás tres secciones:
    - **Exploración de Datos**: Gráficos interactivos del dataset
