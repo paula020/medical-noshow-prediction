@@ -24,7 +24,3 @@ dependencies = [
 
 [tool.uv]
 dev-dependencies = []
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
