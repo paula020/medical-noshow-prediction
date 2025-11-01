@@ -57,7 +57,6 @@ medical-noshow-prediction/
 │
 ├── requirements.txt               # Dependencias del proyecto
 ├── README.md                      # Este archivo
-└── CLAUDE.md                      # Guía para Claude Code
 ```
 
 ---
@@ -68,6 +67,20 @@ medical-noshow-prediction/
 - Python 3.11 o superior
 - uv instalado (https://docs.astral.sh/uv/)
 
+### Instalación de uv
+
+Si no tienes uv instalado, ejecuta:
+
+**En Windows (PowerShell):**
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+**En Linux/Mac:**
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
 ### Paso 1: Clonar el Repositorio
 
 ```bash
@@ -75,49 +88,90 @@ git clone https://github.com/paula020/medical-noshow-prediction.git
 cd medical-noshow-prediction
 ```
 
-### Paso 2: Instalar Dependencias
+### Paso 2: Crear Entorno Virtual e Instalar Dependencias
+
+Con `uv`, todo se hace en un solo comando:
 
 ```bash
 uv sync
 ```
 
-Este comando crea automaticamente el entorno virtual e instala todas las dependencias definidas en `pyproject.toml`.
+Este comando automaticamente:
+- Crea un entorno virtual en `.venv/`
+- Instala Python 3.11 si no está disponible
+- Instala todas las dependencias del `pyproject.toml`
+- Configura el proyecto listo para usar
+
+### Verificar Instalación
+
+```bash
+uv run python --version
+```
+
+Debería mostrar Python 3.11 o superior.
 
 ---
 
 ## Uso del Proyecto
 
-### 1. Ejecutar el Análisis Completo
+### 1. Ejecutar el Análisis Completo (Notebook)
 
-Abrir y ejecutar el notebook principal:
+**Paso a paso:**
 
-```bash
-uv run jupyter notebook notebooks/01_analisis_completo.ipynb
-```
+1. Abre una terminal en el directorio del proyecto
 
-Este notebook incluye:
+2. Ejecuta el comando para abrir Jupyter:
+   ```bash
+   uv run jupyter notebook notebooks/01_analisis_completo.ipynb
+   ```
+
+3. Se abrirá una pestaña en tu navegador con Jupyter
+
+4. En Jupyter, ve al menú superior:
+   - Click en **"Kernel"**
+   - Selecciona **"Restart & Run All"**
+   - Confirma cuando te pregunte
+
+5. Espera a que todas las celdas se ejecuten (puede tardar 5-10 minutos)
+
+6. Al finalizar, verás:
+   - Gráficos interactivos de Plotly
+   - Tablas con métricas de los modelos
+   - Mensaje "Modelos guardados exitosamente"
+
+**El notebook incluye:**
 - Carga y exploración de datos
 - Análisis exploratorio (EDA) con visualizaciones Plotly
-- Implementación de pipelines con `ColumnTransformer`
+- Pipeline de preprocesamiento con ColumnTransformer
 - Generación de datos sintéticos con SMOTE
-- Entrenamiento de modelos (Random Forest y Regresión Logística)
-- Comparación de modelos con y sin datos sintéticos
+- Entrenamiento de Random Forest y Regresión Logística
+- Comparación de modelos (con y sin datos sintéticos)
 - Análisis de importancia de variables
-- Guardado de modelos entrenados
 
-### 2. Ejecutar la Aplicación Streamlit
+### 2. Ejecutar la Aplicación Web (Streamlit)
 
-Una vez entrenados los modelos, ejecutar la interfaz web:
+**Importante:** Primero debes ejecutar el notebook (paso anterior) para generar los modelos.
 
-```bash
-uv run streamlit run app/streamlit_app.py
-```
+**Paso a paso:**
 
-La aplicación se abrirá en `http://localhost:8501` y permite:
-- Explorar los datos de forma interactiva
-- Visualizar análisis y métricas
-- Realizar predicciones individuales
-- Comparar resultados de modelos
+1. Abre una terminal en el directorio del proyecto
+
+2. Ejecuta el comando:
+   ```bash
+   uv run streamlit run app/streamlit_app.py
+   ```
+
+3. Se abrirá automáticamente en tu navegador en `http://localhost:8501`
+
+4. Si no se abre automáticamente, copia y pega esa URL en tu navegador
+
+5. En la aplicación verás tres secciones:
+   - **Exploración de Datos**: Gráficos interactivos del dataset
+   - **Modelos y Predicciones**: Formulario para hacer predicciones
+   - **Resultados**: Comparación de métricas de los modelos
+
+**Para cerrar la aplicación:**
+- Presiona `Ctrl + C` en la terminal
 
 ---
 
@@ -208,11 +262,6 @@ Ver `requirements.txt` para lista completa de versiones.
 - Todos los procesos aleatorios usan `random_state=42`
 - Los modelos entrenados se guardan en `models/`
 - Los datos procesados mantienen trazabilidad
-
-### Consideraciones Éticas
-- Este sistema es una herramienta de apoyo a la decisión
-- Las predicciones deben interpretarse por profesionales de salud
-- No debe usarse como único criterio para cancelar o denegar citas
 
 ### Mejoras Futuras
 - Incorporar más variables contextuales (clima, transporte)

@@ -59,9 +59,9 @@ except Exception as e:
     st.sidebar.error(f"Error cargando datos: {e}")
     st.stop()
 
-# ============================================================================
+
 # PÁGINA 1: EXPLORACIÓN DE DATOS
-# ============================================================================
+
 if page == "Exploración de Datos":
     st.header("Análisis Exploratorio de Datos")
 
@@ -129,9 +129,9 @@ if page == "Exploración de Datos":
         fig = plot_correlation_matrix(df, numeric_cols)
         st.plotly_chart(fig, use_container_width=True)
 
-# ============================================================================
+
 # PÁGINA 2: MODELOS Y PREDICCIONES
-# ============================================================================
+
 elif page == "Modelos y Predicciones":
     st.header("Modelos de Machine Learning")
 
@@ -226,9 +226,9 @@ elif page == "Modelos y Predicciones":
                     else:
                         st.success(f"**Probablemente Asistirá ({(1-lr_proba)*100:.1f}%)**")
 
-# ============================================================================
+
 # PÁGINA 3: RESULTADOS
-# ============================================================================
+
 elif page == "Resultados":
     st.header("Resultados y Métricas de Modelos")
 
@@ -285,12 +285,6 @@ elif page == "Resultados":
         """)
 
     st.divider()
-
-    st.info("""
-    **Nota**: Este sistema es una herramienta de apoyo a la toma de decisiones.
-    Las predicciones deben ser interpretadas por profesionales de la salud y
-    combinadas con otros criterios clínicos y operativos.
-    """)
 
 # Footer
 st.divider()
