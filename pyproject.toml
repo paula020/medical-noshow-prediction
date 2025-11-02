@@ -1,0 +1,13 @@
+[project]
+name = "medical-noshow-prediction"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "disutils>=1.4.32.post2",
+    "flaml>=2.3.6",
+    "pycaret-nightly[full]>=2.2.2.dev1607992691",
+    "scikit-learn>=1.7.2",
+    "setuptools>=80.9.0",
+]
