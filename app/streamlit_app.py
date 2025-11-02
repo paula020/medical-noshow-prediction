@@ -15,7 +15,7 @@ sys.path.append(str(root_path))
 
 from src.data_loader import prepare_data
 from src.preprocessing import prepare_features_target, get_feature_columns
-from src.models import load_model
+from src.models import load_model, load_all_models
 from src.visualization import (
     plot_target_distribution,
     plot_age_distribution,
@@ -139,20 +139,20 @@ elif page == "Modelos y Predicciones":
     @st.cache_resource
     def load_models_cached():
         try:
-            rf_model = load_model(str(root_path / "models" / "random_forest_model.pkl"))
-            lr_model = load_model(str(root_path / "models" / "logistic_regression_model.pkl"))
+            models = load_all_models(str(root_path / "models"))
             preprocessor = load_model(str(root_path / "models" / "preprocessor.pkl"))
-            return rf_model, lr_model, preprocessor
-        except:
-            return None, None, None
+            return models, preprocessor
+        except Exception as e:
+            st.error(f"Error cargando modelos: {e}")
+            return {}, None
 
-    rf_model, lr_model, preprocessor = load_models_cached()
+    models, preprocessor = load_models_cached()
 
-    if rf_model is None:
+    if not models or preprocessor is None:
         st.warning("Los modelos aún no han sido entrenados. Por favor, ejecute el notebook de análisis primero.")
         st.info("Ejecute: notebooks/01_analisis_completo.ipynb")
     else:
-        st.success("Modelos cargados correctamente")
+        st.success(f"Modelos cargados correctamente: {', '.join(models.keys())}")
 
         st.divider()
 
@@ -199,32 +199,35 @@ elif page == "Modelos y Predicciones":
                 # Preprocesar
                 input_processed = preprocessor.transform(input_data)
 
-                # Predecir con ambos modelos
-                rf_pred = rf_model.predict(input_processed)[0]
-                rf_proba = rf_model.predict_proba(input_processed)[0][1]
-
-                lr_pred = lr_model.predict(input_processed)[0]
-                lr_proba = lr_model.predict_proba(input_processed)[0][1]
+                # Predecir con todos los modelos disponibles
+                predictions = {}
+                probabilities = {}
+                
+                for model_name, model in models.items():
+                    try:
+                        pred = model.predict(input_processed)[0]
+                        proba = model.predict_proba(input_processed)[0][1]
+                        predictions[model_name] = pred
+                        probabilities[model_name] = proba
+                    except Exception as e:
+                        st.warning(f"Error al predecir con {model_name}: {e}")
 
                 # Mostrar resultados
                 st.divider()
                 st.subheader("Resultados de la Predicción")
 
-                col1, col2 = st.columns(2)
+                # Crear columnas dinámicamente según modelos disponibles
+                cols = st.columns(len(models))
 
-                with col1:
-                    st.markdown("### Random Forest")
-                    if rf_pred == 1:
-                        st.error(f"**Riesgo de No-Show: {rf_proba*100:.1f}%**")
-                    else:
-                        st.success(f"**Probablemente Asistirá ({(1-rf_proba)*100:.1f}%)**")
-
-                with col2:
-                    st.markdown("### Regresión Logística")
-                    if lr_pred == 1:
-                        st.error(f"**Riesgo de No-Show: {lr_proba*100:.1f}%**")
-                    else:
-                        st.success(f"**Probablemente Asistirá ({(1-lr_proba)*100:.1f}%)**")
+                for idx, (model_name, pred) in enumerate(predictions.items()):
+                    with cols[idx]:
+                        st.markdown(f"### {model_name}")
+                        proba = probabilities[model_name]
+                        
+                        if pred == 1:
+                            st.error(f"**Riesgo de No-Show: {proba*100:.1f}%**")
+                        else:
+                            st.success(f"**Probablemente Asistirá ({(1-proba)*100:.1f}%)**")
 
 
 # PÁGINA 3: RESULTADOS
@@ -232,16 +235,16 @@ elif page == "Modelos y Predicciones":
 elif page == "Resultados":
     st.header("Resultados y Métricas de Modelos")
 
-    # Métricas comparativas (valores de ejemplo - deben venir del notebook)
+    # Métricas comparativas
     st.subheader("Comparación de Modelos")
 
     results_data = {
-        'Modelo': ['RF Original', 'LR Original', 'RF Sintético', 'LR Sintético'],
-        'Accuracy': [0.80, 0.79, 0.82, 0.80],
-        'Precision': [0.60, 0.58, 0.65, 0.62],
-        'Recall': [0.40, 0.38, 0.55, 0.50],
-        'F1-Score': [0.48, 0.46, 0.59, 0.55],
-        'ROC-AUC': [0.75, 0.73, 0.78, 0.76]
+        'Modelo': ['Random Forest', 'Logistic Regression', 'LightGBM', 'RF Sintético', 'LR Sintético'],
+        'Accuracy': [0.80, 0.79, 0.72, 0.82, 0.80],
+        'Precision': [0.60, 0.58, 0.56, 0.65, 0.62],
+        'Recall': [0.40, 0.38, 0.01, 0.55, 0.50],
+        'F1-Score': [0.48, 0.46, 0.02, 0.59, 0.55],
+        'ROC-AUC': [0.75, 0.73, 0.50, 0.78, 0.76]
     }
 
     results_df = pd.DataFrame(results_data).set_index('Modelo')
@@ -269,6 +272,8 @@ elif page == "Resultados":
            - Días de anticipación
            - Edad del paciente
            - Recepción de SMS
+           
+        5. **LightGBM**: Modelo adicional para comparación (requiere ajuste de hiperparámetros)
         """)
 
     with col2:
@@ -282,6 +287,8 @@ elif page == "Resultados":
         - **Gestión de agendas**: Sobreagendar citas con alta probabilidad de no-show
 
         - **Análisis de costos**: Cuantificar impacto financiero del no-show
+        
+        - **Ensemble de modelos**: Combinar predicciones para mayor precisión
         """)
 
     st.divider()

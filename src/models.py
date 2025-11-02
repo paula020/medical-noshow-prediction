@@ -174,3 +174,36 @@ def load_model(filepath: str) -> Any:
         Modelo cargado
     """
     return joblib.load(filepath)
+
+
+def load_all_models(models_dir: str = 'models') -> Dict[str, Any]:
+    """
+    Carga todos los modelos disponibles en el directorio de modelos.
+
+    Args:
+        models_dir: Directorio donde están los modelos guardados
+
+    Returns:
+        Diccionario con todos los modelos cargados
+    """
+    from pathlib import Path
+    
+    models = {}
+    models_path = Path(models_dir)
+    
+    # Cargar Random Forest
+    rf_path = models_path / 'random_forest_model.pkl'
+    if rf_path.exists():
+        models['Random Forest'] = load_model(str(rf_path))
+    
+    # Cargar Logistic Regression
+    lr_path = models_path / 'logistic_regression_model.pkl'
+    if lr_path.exists():
+        models['Logistic Regression'] = load_model(str(lr_path))
+    
+    # Cargar LightGBM
+    lgbm_path = models_path / 'Classification_medical_no_show-LGBM.joblib'
+    if lgbm_path.exists():
+        models['LightGBM'] = load_model(str(lgbm_path))
+    
+    return models
