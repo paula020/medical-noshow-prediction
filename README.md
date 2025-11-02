@@ -171,7 +171,11 @@ Debería mostrar Python 3.11 o superior.
 - Análisis de importancia de variables
 
 **Sobre los otros notebooks:**
-- `notebooks/03ajuste_entrenamiento.ipynb`: Contiene el entrenamiento del modelo LightGBM realizado por el equipo. Este notebook ya fue ejecutado y generó el archivo `models/Classification_medical_no_show-LGBM.joblib`. No es necesario ejecutarlo nuevamente.
+- `notebooks/03ajuste_entrenamiento.ipynb`: Contiene el entrenamiento del modelo LightGBM realizado por el equipo. Este notebook ya fue ejecutado y generó el archivo `models/Classification_medical_no_show-LGBM.joblib`. Si deseas ejecutarlo nuevamente, usa:
+  ```bash
+  uv run jupyter notebook notebooks/03ajuste_entrenamiento.ipynb
+  ```
+  **Nota:** El proceso de GridSearchCV puede tardar varios minutos.
 - `notebooks/exploratory/02exploracion_datos.ipynb`: Notebook de exploración inicial. Es opcional, solo para referencia del proceso exploratorio.
 - Los archivos en `.ipynb_checkpoints/` son copias de respaldo automáticas de Jupyter. No deben ejecutarse manualmente.
 
