@@ -153,6 +153,8 @@ Debería mostrar Python 3.11 o superior.
    - Confirma cuando te pregunte
 
 5. Espera a que todas las celdas se ejecuten (puede tardar 5-10 minutos)
+   
+   **Tip**: Una celda está ejecutada cuando muestra un número `[3]` a la izquierda. Si ves un asterisco `[*]`, significa que aún está procesando.
 
 6. Al finalizar, verás:
    - Gráficos interactivos de Plotly
@@ -167,6 +169,11 @@ Debería mostrar Python 3.11 o superior.
 - Entrenamiento de Random Forest y Regresión Logística
 - Comparación de modelos (con y sin datos sintéticos)
 - Análisis de importancia de variables
+
+**Sobre los otros notebooks:**
+- `notebooks/03ajuste_entrenamiento.ipynb`: Contiene el entrenamiento del modelo LightGBM realizado por el equipo. Este notebook ya fue ejecutado y generó el archivo `models/Classification_medical_no_show-LGBM.joblib`. No es necesario ejecutarlo nuevamente.
+- `notebooks/exploratory/02exploracion_datos.ipynb`: Notebook de exploración inicial. Es opcional, solo para referencia del proceso exploratorio.
+- Los archivos en `.ipynb_checkpoints/` son copias de respaldo automáticas de Jupyter. No deben ejecutarse manualmente.
 
 ### 2. Ejecutar la Aplicación Web (Streamlit)
 
@@ -192,6 +199,14 @@ Debería mostrar Python 3.11 o superior.
    - **Exploración de Datos**: Gráficos interactivos del dataset
    - **Modelos y Predicciones**: Formulario para hacer predicciones
    - **Resultados**: Comparación de métricas de los modelos
+
+**Sobre los modelos en Streamlit:**
+- La aplicación carga automáticamente todos los modelos disponibles en la carpeta `models/`:
+  - Random Forest (`random_forest_model.pkl`)
+  - Logistic Regression (`logistic_regression_model.pkl`)
+  - LightGBM (`Classification_medical_no_show-LGBM.joblib`)
+- Al hacer una predicción en el formulario, verás los resultados de los 3 modelos simultáneamente.
+- Si algún modelo no puede predecir con los datos del formulario, mostrará un mensaje de advertencia pero la aplicación seguirá funcionando con los demás modelos.
 
 **Para cerrar la aplicación:**
 - Presiona `Ctrl + C` en la terminal
