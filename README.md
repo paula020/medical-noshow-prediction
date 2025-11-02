@@ -6,6 +6,19 @@ Sistema de Machine Learning para predecir la probabilidad de que un paciente no 
 
 ---
 
+## Equipo de Desarrollo
+
+- Diego Fernando Nuñez Diaz
+- Diego Fernando Castaneda Loaiza
+- Paula Carolina Barrera Camargo
+- Mateo Atehortua Arango
+
+**Universidad**: Universidad de Medellin  
+**Asignatura**: Proyecto I  
+**Docente**: David Palacio Jimenez
+
+---
+
 ## Descripción del Proyecto
 
 Este proyecto implementa un análisis completo de datos médicos utilizando técnicas de ciencia de datos y machine learning para predecir la inasistencia de pacientes a citas programadas.
@@ -255,15 +268,6 @@ Ver `requirements.txt` para lista completa de versiones.
 
 ---
 
-## Equipo de Desarrollo
-
-- Diego Fernando Nuñez Dia
-- Diego Fernando Castaneda Loaiza
-- Paula Carolina Barrera Camargo
-- Mateo Atehortua Arango
-
----
-
 ## Notas Técnicas
 
 ### Reproducibilidad
@@ -276,17 +280,3 @@ Ver `requirements.txt` para lista completa de versiones.
 - Implementar modelos de deep learning
 - Sistema de feedback continuo con datos reales
 - API REST para integración con sistemas hospitalarios
-
----
-
-## Licencia
-
-Este proyecto es de uso académico para la Especialización en Ciencia de Datos e IA.
-
----
-
-## Contacto y Soporte
-
-Para preguntas o sugerencias sobre este proyecto, contactar al equipo de desarrollo.
-
-**Última actualización**: Octubre 2025
