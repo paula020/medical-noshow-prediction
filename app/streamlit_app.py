@@ -166,6 +166,7 @@ elif page == "Modelos y Predicciones":
                 age = st.number_input("Edad", min_value=0, max_value=100, value=35)
                 gender = st.selectbox("Género", ["F", "M"])
                 scholarship = st.selectbox("Beca Social", [0, 1], format_func=lambda x: "Sí" if x == 1 else "No")
+                neighbourhood = st.text_input("Barrio", value="JARDIM CAMBURI")
 
             with col2:
                 hipertension = st.selectbox("Hipertensión", [0, 1], format_func=lambda x: "Sí" if x == 1 else "No")
@@ -184,6 +185,7 @@ elif page == "Modelos y Predicciones":
                 input_data = pd.DataFrame({
                     'Age': [age],
                     'Gender': [gender],
+                    'Neighbourhood': [neighbourhood],
                     'Scholarship': [scholarship],
                     'Hipertension': [hipertension],
                     'Diabetes': [diabetes],
