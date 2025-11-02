@@ -40,7 +40,7 @@ Ayudar a clínicas y hospitales a:
 
 ## Estructura del Proyecto
 
-```
+```text
 medical-noshow-prediction/
 │
 ├── data/                          # Datos del proyecto
@@ -48,9 +48,10 @@ medical-noshow-prediction/
 │   ├── processed/                 # Datos procesados
 │   └── synthetic/                 # Datos sintéticos generados
 │
-├── notebooks/                     # Jupyter notebooks
-│   ├── 01_analisis_completo.ipynb # Análisis principal para entrega
-│   └── exploratory/               # Notebooks de exploracion inicial
+├── notebooks/                       # Jupyter notebooks
+│   ├── 01_analisis_completo.ipynb   # Análisis principal para entrega
+│   ├── 03ajuste_entrenamiento.ipynb # Entrenamiento modelo LightGBM
+│   └── exploratory/                 # Notebooks de exploracion inicial
 │
 ├── src/                           # Código fuente modular
 │   ├── __init__.py
@@ -63,9 +64,10 @@ medical-noshow-prediction/
 ├── app/                           # Aplicación Streamlit
 │   └── streamlit_app.py          # Interfaz web interactiva
 │
-├── models/                        # Modelos entrenados (generados al ejecutar)
+├── models/                          # Modelos entrenados (generados al ejecutar)
 │   ├── random_forest_model.pkl
 │   ├── logistic_regression_model.pkl
+│   ├── Classification_medical_no_show-LGBM.joblib
 │   └── preprocessor.pkl
 │
 ├── requirements.txt               # Dependencias del proyecto
@@ -225,6 +227,11 @@ Debería mostrar Python 3.11 o superior.
    - Solver: lbfgs
    - Más interpretable
    - Baseline para comparación
+
+3. **LightGBM (Gradient Boosting)**
+   - Boosting de árboles de decisión, eficiente para datos tabulares
+   - Buen manejo de desbalance y variables categóricas codificadas
+   - Archivo del modelo: `models/Classification_medical_no_show-LGBM.joblib`
 
 ### 5. Métricas de Evaluación
 - Accuracy
