@@ -107,11 +107,20 @@ cd medical-noshow-prediction
 
 Con `uv`, todo se hace en un solo comando:
 
+Windows (PowerShell):
+
+```powershell
+uv sync
+```
+
+Linux/Mac (bash/zsh):
+
 ```bash
 uv sync
 ```
 
 Este comando automaticamente:
+
 - Crea un entorno virtual en `.venv/`
 - Instala Python 3.11 si no está disponible
 - Instala todas las dependencias del `pyproject.toml`
@@ -122,6 +131,14 @@ Este comando automaticamente:
 
 
 ### Verificar Instalación
+
+Windows (PowerShell):
+
+```powershell
+uv run python --version
+```
+
+Linux/Mac (bash/zsh):
 
 ```bash
 uv run python --version
@@ -140,12 +157,25 @@ Debería mostrar Python 3.11 o superior.
 1. Abre una terminal en el directorio del proyecto
 
 2. Ejecuta el comando para abrir Jupyter:
+
+   Windows (PowerShell):
+
+   ```powershell
+   uv run jupyter notebook notebooks/01_analisis_completo.ipynb
+   ```
+
+   Linux/Mac (bash/zsh):
+
    ```bash
    uv run jupyter notebook notebooks/01_analisis_completo.ipynb
    ```
-![Ejecucion del notebook](img/Jupyter.png)
+
+   ![Ejecucion del notebook](img/Jupyter.png)
 
 3. Se abrirá una pestaña en tu navegador con Jupyter
+
+   Nota: la terminal donde ejecutaste Jupyter quedará ocupada mientras el servidor está corriendo. Déjala abierta. Para ejecutar la aplicación web (Streamlit) al mismo tiempo, abre otra terminal.
+   Tip VS Code (Windows): Terminal > New Terminal o usa el atajo Ctrl+Shift+`
 
 4. En Jupyter, ve al menú superior:
    - Click en **"Kernel"**
@@ -153,7 +183,7 @@ Debería mostrar Python 3.11 o superior.
    - Confirma cuando te pregunte
 
 5. Espera a que todas las celdas se ejecuten (puede tardar 5-10 minutos)
-   
+
    **Tip**: Una celda está ejecutada cuando muestra un número `[3]` a la izquierda. Si ves un asterisco `[*]`, significa que aún está procesando.
 
 6. Al finalizar, verás:
@@ -162,6 +192,7 @@ Debería mostrar Python 3.11 o superior.
    - Mensaje "Modelos guardados exitosamente"
 
 **El notebook incluye:**
+
 - Carga y exploración de datos
 - Análisis exploratorio (EDA) con visualizaciones Plotly
 - Pipeline de preprocesamiento con ColumnTransformer
@@ -171,10 +202,21 @@ Debería mostrar Python 3.11 o superior.
 - Análisis de importancia de variables
 
 **Sobre los otros notebooks:**
+
 - `notebooks/03ajuste_entrenamiento.ipynb`: Contiene el entrenamiento del modelo LightGBM realizado por el equipo. Este notebook ya fue ejecutado y generó el archivo `models/Classification_medical_no_show-LGBM.joblib`. Si deseas ejecutarlo nuevamente, usa:
-  ```bash
-  uv run jupyter notebook notebooks/03ajuste_entrenamiento.ipynb
-  ```
+
+   Windows (PowerShell):
+
+   ```powershell
+   uv run jupyter notebook notebooks/03ajuste_entrenamiento.ipynb
+   ```
+
+   Linux/Mac (bash/zsh):
+
+   ```bash
+   uv run jupyter notebook notebooks/03ajuste_entrenamiento.ipynb
+   ```
+  
   **Nota:** El proceso de GridSearchCV puede tardar varios minutos.
 - `notebooks/exploratory/02exploracion_datos.ipynb`: Notebook de exploración inicial. Es opcional, solo para referencia del proceso exploratorio.
 - Los archivos en `.ipynb_checkpoints/` son copias de respaldo automáticas de Jupyter. No deben ejecutarse manualmente.
@@ -185,26 +227,41 @@ Debería mostrar Python 3.11 o superior.
 
 **Paso a paso:**
 
-1. Abre una terminal en el directorio del proyecto
+1. Abre otra terminal en el directorio del proyecto
+
+   Tip VS Code (Windows): Terminal > New Terminal o usa el atajo Ctrl+Shift+`
 
 2. Ejecuta el comando:
+
+   Windows (PowerShell):
+
+   ```powershell
+   uv run streamlit run app/streamlit_app.py
+   ```
+
+   Linux/Mac (bash/zsh):
+
    ```bash
    uv run streamlit run app/streamlit_app.py
    ```
+
 
 3. Se abrirá automáticamente en tu navegador en `http://localhost:8501`
 
 4. Si no se abre automáticamente, copia y pega esa URL en tu navegador
    se visualizara una imagen similar a la siguiente:
+   
    ![Install dependencias](img/streamlit.png)
 
 
 5. En la aplicación verás tres secciones:
+
    - **Exploración de Datos**: Gráficos interactivos del dataset
    - **Modelos y Predicciones**: Formulario para hacer predicciones
    - **Resultados**: Comparación de métricas de los modelos
 
 **Sobre los modelos en Streamlit:**
+
 - La aplicación carga automáticamente todos los modelos disponibles en la carpeta `models/`:
   - Random Forest (`random_forest_model.pkl`)
   - Logistic Regression (`logistic_regression_model.pkl`)
@@ -213,6 +270,7 @@ Debería mostrar Python 3.11 o superior.
 - Si algún modelo no puede predecir con los datos del formulario, mostrará un mensaje de advertencia pero la aplicación seguirá funcionando con los demás modelos.
 
 **Para cerrar la aplicación:**
+
 - Presiona `Ctrl + C` en la terminal
 
 ---
@@ -220,11 +278,13 @@ Debería mostrar Python 3.11 o superior.
 ## Metodología
 
 ### 1. Procesamiento de Datos
+
 - Limpieza de valores inconsistentes (edades negativas, outliers)
 - Conversión de tipos de datos apropiados
 - Creación de features: días de anticipación, día de la semana, conteo de condiciones crónicas
 
 ### 2. Pipeline de Preprocesamiento
+
 ```python
 - Variables Numéricas: Imputación (mediana) + StandardScaler
 - Variables Categóricas: Imputación (moda) + OneHotEncoder
@@ -232,11 +292,13 @@ Debería mostrar Python 3.11 o superior.
 ```
 
 ### 3. Generación de Datos Sintéticos
+
 - Técnica: SMOTE (Synthetic Minority Over-sampling Technique)
 - Objetivo: Balancear clases (20% no-show vs 80% asistencia)
 - Implementado con `imbalanced-learn`
 
 ### 4. Modelos Implementados
+
 1. **Random Forest Classifier**
    - 100 árboles
    - Profundidad máxima: 10
@@ -253,6 +315,7 @@ Debería mostrar Python 3.11 o superior.
    - Archivo del modelo: `models/Classification_medical_no_show-LGBM.joblib`
 
 ### 5. Métricas de Evaluación
+
 - Accuracy
 - Precision
 - Recall
@@ -264,6 +327,7 @@ Debería mostrar Python 3.11 o superior.
 ## Resultados Principales
 
 ### Hallazgos Clave
+
 1. **Desbalance de Clases**: ~20% de tasa de no-show en datos originales
 2. **Impacto de SMOTE**: Mejora significativa en recall y F1-score
 3. **Mejor Modelo**: Random Forest con datos sintéticos
@@ -274,6 +338,7 @@ Debería mostrar Python 3.11 o superior.
    - Condiciones crónicas
 
 ### Aplicaciones Prácticas
+
 - Sistema de alertas tempranas para citas de alto riesgo
 - Optimización de envío de recordatorios SMS
 - Mejor gestión y planificación de agendas médicas
@@ -297,11 +362,13 @@ Ver `requirements.txt` para lista completa de versiones.
 ## Notas Técnicas
 
 ### Reproducibilidad
+
 - Todos los procesos aleatorios usan `random_state=42`
 - Los modelos entrenados se guardan en `models/`
 - Los datos procesados mantienen trazabilidad
 
 ### Mejoras Futuras
+
 - Incorporar más variables contextuales (clima, transporte)
 - Implementar modelos de deep learning
 - Sistema de feedback continuo con datos reales
