@@ -196,7 +196,7 @@ elif page == "Modelos y Predicciones":
                     'ChronicConditionsCount': [hipertension + diabetes + alcoholism]
                 })
 
-                # Preprocesar
+                # Preprocesar datos para modelos que NO son pipelines
                 input_processed = preprocessor.transform(input_data)
 
                 # Predecir con todos los modelos disponibles
@@ -205,8 +205,15 @@ elif page == "Modelos y Predicciones":
                 
                 for model_name, model in models.items():
                     try:
-                        pred = model.predict(input_processed)[0]
-                        proba = model.predict_proba(input_processed)[0][1]
+                        # LightGBM es un Pipeline completo, usar input_data original
+                        # Los demás modelos usan input_processed
+                        if model_name == "LightGBM":
+                            pred = model.predict(input_data)[0]
+                            proba = model.predict_proba(input_data)[0][1]
+                        else:
+                            pred = model.predict(input_processed)[0]
+                            proba = model.predict_proba(input_processed)[0][1]
+                        
                         predictions[model_name] = pred
                         probabilities[model_name] = proba
                     except Exception as e:
