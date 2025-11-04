@@ -8,10 +8,10 @@ Sistema de Machine Learning para predecir la probabilidad de que un paciente no 
 
 ## Equipo de Desarrollo
 
-- Diego Fernando Nuñez Diaz
-- Diego Fernando Castaneda Loaiza
-- Paula Carolina Barrera Camargo
-- Mateo Atehortua Arango
+- Atehortua Arango, Mateo
+- Barrera Camargo, Paula Carolina
+- Castaneda Loaiza, Diego Fernando
+- Nuñez Diaz, Diego Fernando
 
 **Universidad**: Universidad de Medellin  
 **Asignatura**: Proyecto I  
