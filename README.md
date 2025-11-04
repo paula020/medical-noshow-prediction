@@ -99,8 +99,8 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ### Paso 1: Clonar el Repositorio
 
 ```bash
-git clone https://github.com/paula020/medical-noshow-prediction.git
-cd medical-noshow-prediction
+git clone https://github.com/paula020/di-di-pa-ma-medical-noshow-prediction.git
+cd di-di-pa-ma-medical-noshow-prediction
 ```
 
 ### Paso 2: Crear Entorno Virtual e Instalar Dependencias
